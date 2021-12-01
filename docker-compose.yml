@@ -1,0 +1,30 @@
+version: "3.9"
+services:
+  say-hello:
+    image: node:14.3.0
+    command: echo 'Hello world!'
+  shell:
+    image: node:14.3.0
+    volumes:
+      - .:/code
+      - node_modules:/code/node_modules
+    working_dir: /code
+    command: bash
+  run:
+    image: node:14.3.0
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/code
+      - node_modules:/code/node_modules
+    working_dir: /code
+    command: yarn exec ts-node index.ts
+  setup:
+    image: node:14.3.0
+    volumes:
+      - .:/code
+      - node_modules:/code/node_modules
+    working_dir: /code
+    command: yarn install
+volumes:
+  node_modules: {}

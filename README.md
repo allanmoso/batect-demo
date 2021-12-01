@@ -1,2 +1,2 @@
 # batect-demo
-A working demo for batect.  https://batect.dev/
+Implementing the batect demo using docker-compose for comparison.
