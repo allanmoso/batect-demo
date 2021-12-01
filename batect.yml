@@ -1,30 +1,24 @@
-containers:
-  build-env:
-    image: node:14.3.0
-    volumes:
-      - local: .
-        container: /code
-      - type: cache
-        container: /code/node_modules
-        name: node_modules
-    working_directory: /code
+include:
+  - type: git
+    repo: https://github.com/batect/node-bundle.git
+    ref: 0.24.0
 
 tasks:
   say-hello:
     description: Say hello to everyone
     run:
-      container: build-env 
+      container: node-build-env 
       command: echo 'Hello world!'
  
   shell:
     description: Start a shell in development environment
     run:
-      container: build-env
+      container: node-build-env
       command: bash
   run:
     description: Run the application
     run:
-      container: build-env
+      container: node-build-env
       command: yarn exec ts-node index.ts
       ports:
         - local: 8080
@@ -32,5 +26,5 @@ tasks:
   setup:
     description: Install dependencies needed to build and run the application
     run:
-      container: build-env
+      container: node-build-env
       command: yarn install
