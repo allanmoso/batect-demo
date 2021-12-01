@@ -1,15 +1,12 @@
 include:
   - type: git
+    repo: https://github.com/batect/hello-world-bundle.git
+    ref: 0.3.0
+  - type: git
     repo: https://github.com/batect/node-bundle.git
     ref: 0.24.0
 
 tasks:
-  say-hello:
-    description: Say hello to everyone
-    run:
-      container: node-build-env 
-      command: echo 'Hello world!'
- 
   shell:
     description: Start a shell in development environment
     run:
